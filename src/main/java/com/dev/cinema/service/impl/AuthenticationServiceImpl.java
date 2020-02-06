@@ -25,12 +25,8 @@ public class AuthenticationServiceImpl implements AuthenticationService {
     }
 
     @Override
-    public User register(String email, String password) throws AuthenticationException {
-        User user = userService.findByEmail(email);
-        if (user != null) {
-            throw new AuthenticationException("Not valid e-mail address: " + email);
-        }
-        user = new User();
+    public User register(String email, String password) {
+        User user = new User();
         user.setEmail(email);
         user.setPassword(password);
         return userService.add(user);
