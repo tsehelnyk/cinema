@@ -1,7 +1,6 @@
 package com.dev.cinema;
 
 import com.dev.cinema.exception.AuthenticationException;
-import com.dev.cinema.lib.Inject;
 import com.dev.cinema.lib.Injector;
 import com.dev.cinema.model.CinemaHall;
 import com.dev.cinema.model.Movie;
