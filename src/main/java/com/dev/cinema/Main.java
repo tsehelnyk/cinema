@@ -18,7 +18,7 @@ import java.time.LocalTime;
 public class Main {
     private static Injector injector = Injector.getInstance("com.dev.cinema");
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws AuthenticationException {
         Movie movie = new Movie();
         movie.setTitle("Fast and Furious");
         MovieService movieService = (MovieService) injector.getInstance(MovieService.class);

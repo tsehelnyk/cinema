@@ -1,6 +1,5 @@
 package com.dev.cinema.util;
 
-import com.dev.cinema.exception.HashGeneratingException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
@@ -17,7 +16,7 @@ public class HashUtil {
         return salt;
     }
 
-    public static String hashPassword(String password, byte[] salt) throws HashGeneratingException {
+    public static String hashPassword(String password, byte[] salt) {
         StringBuilder hashedPassword = new StringBuilder();
 
         try {
@@ -30,8 +29,7 @@ public class HashUtil {
             }
 
         } catch (NoSuchAlgorithmException e) {
-            LOGGER.error("Can't generate hash: ", e);
-            throw new HashGeneratingException("Failed to get hash: " + e);
+            throw new RuntimeException("Failed to get hash: " + e);
         }
 
         return hashedPassword.toString();
