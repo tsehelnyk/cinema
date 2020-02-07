@@ -9,7 +9,6 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "cinema_hall")
 public class CinemaHall {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -44,6 +43,6 @@ public class CinemaHall {
     public String toString() {
         return "CinemaHall {"
                 + "id = " + id
-                + ", capacity = " + capacity + '}';
+                + ", capacity = " + capacity + "}";
     }
 }
