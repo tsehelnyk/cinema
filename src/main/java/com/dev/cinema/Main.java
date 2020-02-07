@@ -6,6 +6,7 @@ import com.dev.cinema.model.CinemaHall;
 import com.dev.cinema.model.Movie;
 import com.dev.cinema.model.MovieSession;
 import com.dev.cinema.model.ShoppingCart;
+import com.dev.cinema.model.Ticket;
 import com.dev.cinema.model.User;
 import com.dev.cinema.service.AuthenticationService;
 import com.dev.cinema.service.CinemaHallService;
@@ -26,6 +27,14 @@ public class Main {
         MovieSession movieSession = movieSessionTest(movie, cinemaHall);
         User user = userTest();
         ShoppingCart shoppingCart = shoppingCartTest(user, movieSession);
+
+        Ticket ticket = new Ticket();
+        ticket.setUser(user);
+        movie.setTitle("Slow and pacific");
+        ticket.setMovie(movie);
+        shoppingCart.getTickets().add(ticket);
+        System.out.println(shoppingCart);
+
     }
 
     private static Movie movieTest() {

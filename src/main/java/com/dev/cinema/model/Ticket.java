@@ -64,7 +64,7 @@ public class Ticket {
 
     @Override
     public String toString() {
-        return "ShoppingCart{ "
+        return "Ticket{ "
                 + "id = " + id
                 + ",\nMovie = " + movie
                 + ",\nCinema hall = " + cinemaHall
