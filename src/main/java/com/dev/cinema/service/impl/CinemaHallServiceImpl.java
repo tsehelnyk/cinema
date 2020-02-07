@@ -9,7 +9,6 @@ import java.util.List;
 
 @Service
 public class CinemaHallServiceImpl implements CinemaHallService {
-
     @Inject
     private static CinemaHallDao cinemaHallDao;
 

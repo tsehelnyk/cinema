@@ -9,8 +9,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "movie_session")
-public class MovieSession {
+@Table(name = "ticket")
+public class Ticket {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -18,6 +18,8 @@ public class MovieSession {
     private Movie movie;
     @ManyToOne
     private CinemaHall cinemaHall;
+    @ManyToOne
+    private User user;
     private LocalDateTime showTime;
 
     public Long getId() {
@@ -44,6 +46,14 @@ public class MovieSession {
         this.cinemaHall = cinemaHall;
     }
 
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
     public LocalDateTime getShowTime() {
         return showTime;
     }
@@ -54,10 +64,11 @@ public class MovieSession {
 
     @Override
     public String toString() {
-        return "MovieSession{"
+        return "Ticket{ "
                 + "id = " + id
-                + ",\n" + movie
-                + ",\n" + cinemaHall
-                + ",\n" + "Show time = " + showTime + '}';
+                + ",\nMovie = " + movie
+                + ",\nCinema hall = " + cinemaHall
+                + ",\nShow time = " + showTime
+                + ",\nuser = " + user + '}';
     }
 }
