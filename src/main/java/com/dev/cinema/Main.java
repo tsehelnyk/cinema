@@ -5,41 +5,43 @@ import com.dev.cinema.lib.Injector;
 import com.dev.cinema.model.CinemaHall;
 import com.dev.cinema.model.Movie;
 import com.dev.cinema.model.MovieSession;
+import com.dev.cinema.model.Order;
 import com.dev.cinema.model.ShoppingCart;
-import com.dev.cinema.model.Ticket;
 import com.dev.cinema.model.User;
 import com.dev.cinema.service.AuthenticationService;
 import com.dev.cinema.service.CinemaHallService;
 import com.dev.cinema.service.MovieService;
 import com.dev.cinema.service.MovieSessionService;
+import com.dev.cinema.service.OrderService;
 import com.dev.cinema.service.ShoppingCartService;
 import com.dev.cinema.service.UserService;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.util.List;
 
 public class Main {
     private static Injector injector = Injector.getInstance("com.dev.cinema");
 
     public static void main(String[] args) throws AuthenticationException {
-        Movie movie = movieTest();
+        Movie movie = movieTest("Fast and Furious");
         CinemaHall cinemaHall = cinemaHallTest();
         MovieSession movieSession = movieSessionTest(movie, cinemaHall);
         User user = userTest();
         ShoppingCart shoppingCart = shoppingCartTest(user, movieSession);
 
-        Ticket ticket = new Ticket();
-        ticket.setUser(user);
-        movie.setTitle("Slow and pacific");
-        ticket.setMovie(movie);
-        shoppingCart.getTickets().add(ticket);
-        System.out.println(shoppingCart);
+        orderTest(user, shoppingCart);
 
+        movie = movieTest("Slow and Pacific");
+        movieSession = movieSessionTest(movie, cinemaHall);
+        shoppingCart = shoppingCartTest(user, movieSession);
+
+        orderTest(user, shoppingCart);
     }
 
-    private static Movie movieTest() {
+    private static Movie movieTest(String movieTitle) {
         Movie movie = new Movie();
-        movie.setTitle("Fast and Furious");
+        movie.setTitle(movieTitle);
         MovieService movieService = (MovieService) injector.getInstance(MovieService.class);
         movieService.add(movie);
         movieService.getAll().forEach(System.out::println);
@@ -98,4 +100,14 @@ public class Main {
         System.out.println(shoppingCart);
         return shoppingCart;
     }
+
+    private static List<Order> orderTest(User user, ShoppingCart shoppingCart) {
+        OrderService orderService =
+                (OrderService) injector.getInstance(OrderService.class);
+        orderService.completeOrder(shoppingCart.getTickets(), user);
+        List<Order> orders = orderService.getOrderHistory(user);
+        System.out.println(orders);
+        return orders;
+    }
+
 }
