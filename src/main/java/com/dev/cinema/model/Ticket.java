@@ -66,9 +66,9 @@ public class Ticket {
     public String toString() {
         return "Ticket{ "
                 + "id = " + id
-                + ",\nMovie = " + movie
-                + ",\nCinema hall = " + cinemaHall
-                + ",\nShow time = " + showTime
-                + ",\nuser = " + user + '}';
+                + ",\n      Movie = " + movie
+                + ",\n      Cinema hall = " + cinemaHall
+                + ",\n      Show time = " + showTime
+                + ",\n      user = " + user + '}';
     }
 }
