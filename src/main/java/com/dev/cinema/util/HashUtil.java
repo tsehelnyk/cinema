@@ -3,10 +3,8 @@ package com.dev.cinema.util;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
-import org.apache.log4j.Logger;
 
 public class HashUtil {
-    private static final Logger LOGGER = Logger.getLogger(HashUtil.class);
 
     public static byte[] getSalt() {
         SecureRandom random = new SecureRandom();
