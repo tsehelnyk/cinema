@@ -47,4 +47,12 @@ public class MovieDaoImpl implements MovieDao {
         }
     }
 
+    @Override
+    public Movie get(Long id) {
+        try (Session session = sessionFactory.openSession()) {
+            return session.get(Movie.class, id);
+        } catch (Exception e) {
+            throw new RuntimeException("Can't find user: ", e);
+        }
+    }
 }
