@@ -43,4 +43,13 @@ public class CinemaHallDaoImpl implements CinemaHallDao {
             throw new RuntimeException("Can't get list of cinema halls from database: ", e);
         }
     }
+
+    @Override
+    public CinemaHall get(Long id) {
+        try (Session session = sessionFactory.openSession()) {
+            return session.get(CinemaHall.class, id);
+        } catch (Exception e) {
+            throw new RuntimeException("Can't find cinema hall: ", e);
+        }
+    }
 }

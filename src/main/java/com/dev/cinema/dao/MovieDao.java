@@ -8,4 +8,5 @@ public interface MovieDao {
 
     List<Movie> getAll();
 
+    Movie get(Long id);
 }

@@ -7,4 +7,6 @@ public interface UserDao {
 
     User findByEmail(String email);
 
+    User get(Long id);
+
 }

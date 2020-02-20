@@ -2,3 +2,5 @@
 *.iml
 target/*
 log/*
+*.json
+Cinema.postman_collection.json
