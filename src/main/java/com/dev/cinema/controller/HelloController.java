@@ -25,7 +25,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class HelloController {
-    private static final DateTimeFormatter FORMATTER =
+    private static final DateTimeFormatter DATE_TIME_FORMATTER =
             DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
     private StringBuilder stringBuilder = new StringBuilder();
 
@@ -60,7 +60,7 @@ public class HelloController {
 
         injectOrder(user, shoppingCart);
         return stringBuilder.toString() + "\n data injected \n"
-                + LocalDateTime.now().format(FORMATTER);
+                + LocalDateTime.now().format(DATE_TIME_FORMATTER);
     }
 
     private Movie injectMovie(String movieTitle) {

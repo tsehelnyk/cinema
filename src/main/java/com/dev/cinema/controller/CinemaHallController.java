@@ -12,11 +12,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-/*
-    Add cinema hall - POST: /cinemahalls
-    Get all cinema halls - GET: /cinemahalls
-*/
-
 @RestController
 @RequestMapping("/cinemahalls")
 public class CinemaHallController {

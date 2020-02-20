@@ -19,16 +19,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-/*
-    Add movie session - POST: /shoppingcarts/addmoviesession?
-    userId <— we will remove this param in the future
-    Get by user - GET: /shoppingcarts/byuser?userId
-*/
-
 @RestController
 @RequestMapping("/shoppingcarts")
 public class ShoppingCartController {
-    private static final DateTimeFormatter FORMATTER =
+    private static final DateTimeFormatter DATE_TIME_FORMATTER =
             DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
 
     @Autowired
@@ -46,7 +40,7 @@ public class ShoppingCartController {
         movieSession.setMovie(movieService.get(movieSessionDto.getMovie()));
         movieSession.setCinemaHall(cinemaHallService.get(movieSessionDto.getCinemaHall()));
         movieSession.setShowTime(LocalDateTime.parse(movieSessionDto.getShowTime(),
-                FORMATTER));
+                DATE_TIME_FORMATTER));
         shoppingCartService.addSession(movieSession, userService.get(userId));
         return "movie session added to shopping cart";
     }
@@ -62,6 +56,6 @@ public class ShoppingCartController {
     private TicketDto toTicketDto(Ticket ticket) {
         return new TicketDto(ticket.getMovie().getTitle(),
                 ticket.getCinemaHall().getDescription(),
-                ticket.getShowTime().format(FORMATTER));
+                ticket.getShowTime().format(DATE_TIME_FORMATTER));
     }
 }
