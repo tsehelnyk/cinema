@@ -26,7 +26,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/moviesessions")
 public class MovieSessionController {
-    private static final DateTimeFormatter FORMATTER =
+    private static final DateTimeFormatter DATE_TIME_FORMATTER =
             DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
     private static final DateTimeFormatter DATE_FORMATTER =
             DateTimeFormatter.ofPattern("yyyy-MM-dd");
@@ -44,7 +44,7 @@ public class MovieSessionController {
         movieSession.setMovie(movieService.get(movieSessionDto.getMovie()));
         movieSession.setCinemaHall(cinemaHallService.get(movieSessionDto.getCinemaHall()));
         movieSession.setShowTime(LocalDateTime.parse(movieSessionDto.getShowTime(),
-                FORMATTER));
+                DATE_TIME_FORMATTER));
         movieSessionService.add(movieSession);
         return "movie session added";
     }
@@ -54,7 +54,7 @@ public class MovieSessionController {
                                               @RequestParam("date") String date) {
         return movieSessionService.findAvailableSessions(id, LocalDate.parse(date, DATE_FORMATTER))
                 .stream().map(ms -> new MovieSessionDto(ms.getMovie().getId(),
-                        ms.getCinemaHall().getId(), ms.getShowTime().format(FORMATTER)))
+                        ms.getCinemaHall().getId(), ms.getShowTime().format(DATE_TIME_FORMATTER)))
                 .collect(Collectors.toList());
     }
 }
