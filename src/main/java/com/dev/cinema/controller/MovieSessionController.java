@@ -18,11 +18,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-/*
-    Add moviesession - POST: /moviesessions
-    Get all movie sessions - GET: /moviesessions/available?movieId=1&date=29.02.2020
-*/
-
 @RestController
 @RequestMapping("/moviesessions")
 public class MovieSessionController {

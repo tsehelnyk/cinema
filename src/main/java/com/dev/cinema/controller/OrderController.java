@@ -17,15 +17,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-/*
-    Complete order - POST: /orders/complete
-    Get all orders - GET: /orders
-*/
-
 @RestController
 @RequestMapping("/orders")
 public class OrderController {
-    private static final DateTimeFormatter FORMATTER =
+    private static final DateTimeFormatter DATE_TIME_FORMATTER =
             DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
 
     @Autowired
@@ -52,7 +47,7 @@ public class OrderController {
 
     private List<TicketDto> toTicketsDto(List<Ticket> tickets) {
         return tickets.stream().map(t -> new TicketDto(t.getMovie().getTitle(),
-                t.getCinemaHall().getDescription(), t.getShowTime().format(FORMATTER)))
+                t.getCinemaHall().getDescription(), t.getShowTime().format(DATE_TIME_FORMATTER)))
                 .collect(Collectors.toList());
     }
 }
