@@ -1,10 +1,12 @@
 package com.dev.cinema.dto;
 
 import java.util.List;
+import javax.validation.constraints.NotNull;
 
 public class OrderDto {
-
+    @NotNull
     private List<TicketDto> tickets;
+    @NotNull
     private String orderDate;
 
     public OrderDto() {

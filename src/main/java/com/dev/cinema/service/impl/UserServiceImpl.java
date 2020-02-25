@@ -4,8 +4,8 @@ import com.dev.cinema.dao.UserDao;
 import com.dev.cinema.model.User;
 import com.dev.cinema.service.ShoppingCartService;
 import com.dev.cinema.service.UserService;
-import com.dev.cinema.util.HashUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -14,11 +14,12 @@ public class UserServiceImpl implements UserService {
     private UserDao userDao;
     @Autowired
     private ShoppingCartService shoppingCartService;
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     @Override
     public User add(User user) {
-        user.setSalt(HashUtil.getSalt());
-        user.setPassword(HashUtil.hashPassword(user.getPassword(), user.getSalt()));
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
         user = userDao.add(user);
         shoppingCartService.registerNewShoppingCart(user);
         return user;

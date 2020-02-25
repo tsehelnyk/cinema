@@ -1,10 +1,15 @@
 package com.dev.cinema.dto;
 
 import java.util.List;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
 
 public class ShoppingCartDto {
 
+    @NotNull
     private List<TicketDto> tickets;
+    @NotNull
+    @Min(1)
     private Long userId;
 
     public ShoppingCartDto() {

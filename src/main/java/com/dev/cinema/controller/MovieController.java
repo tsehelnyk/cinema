@@ -5,6 +5,7 @@ import com.dev.cinema.model.Movie;
 import com.dev.cinema.service.MovieService;
 import java.util.List;
 import java.util.stream.Collectors;
+import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -19,7 +20,7 @@ public class MovieController {
     private MovieService movieService;
 
     @PostMapping
-    public String add(@RequestBody MovieDto movieDto) {
+    public String add(@RequestBody @Valid MovieDto movieDto) {
         Movie movie = new Movie();
         movie.setTitle(movieDto.getTitle());
         movie.setDescription(movieDto.getDescription());

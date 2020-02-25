@@ -1,9 +1,13 @@
 package com.dev.cinema.dto;
 
-public class TicketDto {
+import javax.validation.constraints.NotNull;
 
+public class TicketDto {
+    @NotNull
     private String movie;
+    @NotNull
     private String cinemaHall;
+    @NotNull
     private String showTime;
 
     public TicketDto() {

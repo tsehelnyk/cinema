@@ -1,7 +1,11 @@
 package com.dev.cinema.dto;
 
+import javax.validation.constraints.NotNull;
+
 public class MovieDto {
+    @NotNull
     private String title;
+    @NotNull
     private String description;
 
     public MovieDto() {

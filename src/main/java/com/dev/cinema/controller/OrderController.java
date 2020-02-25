@@ -11,6 +11,7 @@ import com.dev.cinema.service.UserService;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.stream.Collectors;
+import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -31,14 +32,14 @@ public class OrderController {
     private ShoppingCartService shoppingCartService;
 
     @PostMapping("/complete")
-    public String completeOrder(@RequestBody UserResponseDto userResponseDto) {
+    public String completeOrder(@RequestBody @Valid UserResponseDto userResponseDto) {
         User user = userService.findByEmail(userResponseDto.getEmail());
         orderService.completeOrder(shoppingCartService.getByUser(user).getTickets(), user);
         return "order completed";
     }
 
     @PostMapping
-    public List<OrderDto> getAllUserOrders(@RequestBody UserResponseDto userResponseDto) {
+    public List<OrderDto> getAllUserOrders(@RequestBody @Valid UserResponseDto userResponseDto) {
         User user = userService.findByEmail(userResponseDto.getEmail());
         return orderService.getOrderHistory(user).stream()
                 .map(o -> new OrderDto(toTicketsDto(o.getTickets()), o.getOrderDate().toString()))

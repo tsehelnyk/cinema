@@ -1,7 +1,15 @@
 package com.dev.cinema.dto;
 
+import com.dev.cinema.security.EmailConstraint;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
 public class UserResponseDto {
+    @NotNull
+    @Size(min = 5)
+    @EmailConstraint
     private String email;
+    @NotNull
     private String name;
 
     public UserResponseDto() {

@@ -1,9 +1,17 @@
 package com.dev.cinema.dto;
 
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+
 public class MovieSessionDto {
 
+    @NotNull
+    @Min(1)
     private Long movie;
+    @NotNull
+    @Min(1)
     private Long cinemaHall;
+    @NotNull
     private String showTime;
 
     public MovieSessionDto() {

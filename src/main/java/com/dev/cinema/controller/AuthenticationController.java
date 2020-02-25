@@ -4,6 +4,7 @@ import com.dev.cinema.dto.UserRequestDto;
 import com.dev.cinema.exception.AuthenticationException;
 import com.dev.cinema.model.User;
 import com.dev.cinema.service.AuthenticationService;
+import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,7 +18,7 @@ public class AuthenticationController {
     private AuthenticationService authenticationService;
 
     @RequestMapping(value = "/login", method = RequestMethod.POST)
-    public String login(@RequestBody UserRequestDto userDto) throws AuthenticationException {
+    public String login(@RequestBody @Valid UserRequestDto userDto) throws AuthenticationException {
         User user = new User();
         user.setEmail(userDto.getEmail());
         user.setPassword(userDto.getPassword());
@@ -26,7 +27,7 @@ public class AuthenticationController {
     }
 
     @RequestMapping(value = "/register", method = RequestMethod.POST)
-    public String register(@RequestBody UserRequestDto userDto) {
+    public String register(@RequestBody @Valid UserRequestDto userDto) {
         authenticationService.register(userDto.getName(), userDto.getEmail(),
                 userDto.getPassword());
         return "user registered";
