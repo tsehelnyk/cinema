@@ -97,20 +97,13 @@ public class HelloController {
     }
 
     private User injectUsersAndLogin() {
-        String userEmail = "joe@gmail.com";
         String userPassword = "123";
         authenticationService.register("Joe", "joe@gmail.com", userPassword);
         authenticationService.register("Bob","bob@gmail.com", userPassword);
         authenticationService.register("John","john@gmail.com", userPassword);
         authenticationService.register("Lenny","lenny@gmail.com", userPassword);
         stringBuilder.append(userService.get(1L) + " user injected\n");
-        try {
-            User user = authenticationService.login(userEmail, userPassword);
-            stringBuilder.append(user + " user logined\n");
-            return user;
-        } catch (AuthenticationException e) {
-            throw new RuntimeException("Something was wrong: ", e);
-        }
+        return userService.findByEmail("joe@gmail.com");
     }
 
     private ShoppingCart injectToShoppingCart(User user, MovieSession movieSession) {
