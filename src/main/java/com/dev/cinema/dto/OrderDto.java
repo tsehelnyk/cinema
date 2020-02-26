@@ -4,9 +4,9 @@ import java.util.List;
 import javax.validation.constraints.NotNull;
 
 public class OrderDto {
-    @NotNull
+    @NotNull(message = "Order tickets could not be null")
     private List<TicketDto> tickets;
-    @NotNull
+    @NotNull(message = "Order date could not be null")
     private String orderDate;
 
     public OrderDto() {

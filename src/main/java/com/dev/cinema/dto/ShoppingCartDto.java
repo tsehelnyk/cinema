@@ -6,9 +6,9 @@ import javax.validation.constraints.NotNull;
 
 public class ShoppingCartDto {
 
-    @NotNull
+    @NotNull(message = "Shopping cart tickets could not be null")
     private List<TicketDto> tickets;
-    @NotNull
+    @NotNull(message = "Shopping cart user id could not be null")
     @Min(1)
     private Long userId;
 

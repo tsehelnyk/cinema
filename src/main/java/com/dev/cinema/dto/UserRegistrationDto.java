@@ -13,16 +13,16 @@ import javax.validation.constraints.Size;
         )
 })
 public class UserRegistrationDto {
-    @NotNull
+    @NotNull(message = "User name could not be null")
     private String name;
-    @NotNull
+    @NotNull(message = "User email could not be null")
     @Size(min = 5)
     @EmailConstraint
     private String email;
-    @NotNull
+    @NotNull(message = "User password could not be null")
     @Size(min = 3)
     private String password;
-    @NotNull
+    @NotNull(message = "User repeated password could not be null")
     @Size(min = 3)
     private String repeatPassword;
 
