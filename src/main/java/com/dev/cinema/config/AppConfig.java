@@ -51,9 +51,10 @@ public class AppConfig {
         properties.put("hibernate.show_sql", environment.getProperty("hibernate.show_sql"));
         properties.put("hibernate.hbm2ddl.auto", environment.getProperty("hibernate.hbm2ddl.auto"));
         sessionFactory.setHibernateProperties(properties);
-        sessionFactory.setAnnotatedClasses(CinemaHall.class,
-                Movie.class, MovieSession.class, Order.class,
-                ShoppingCart.class, Ticket.class, User.class, Role.class);
+        sessionFactory.setPackagesToScan("com.dev.cinema.model");
+//        sessionFactory.setAnnotatedClasses(CinemaHall.class,
+//                Movie.class, MovieSession.class, Order.class,
+//                ShoppingCart.class, Ticket.class, User.class, Role.class);
         return sessionFactory;
     }
 }

@@ -22,7 +22,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         UserBuilder builder = null;
         if (user != null) {
             builder = org.springframework.security.core.userdetails.User.withUsername(userEmail);
-            builder.password(new BCryptPasswordEncoder().encode(user.getPassword()));
+            builder.password(user.getPassword());
             builder.roles(user.getRoles().stream()
                     .map(r -> r.getRoleName())
                     .collect(Collectors.toList())

@@ -16,16 +16,13 @@ public class InitController {
     @Autowired
     private RoleService roleService;
 
-    @Autowired
-    private PasswordEncoder passwordEncoder;
-
     @PostConstruct
     private void postConstruct() {
         Role roleAdmin = new Role("ADMIN");
         roleAdmin = roleService.add(roleAdmin);
         User admin = new User();
         admin.setEmail("admin@gmail.com");
-        admin.setPassword(passwordEncoder.encode("123"));
+        admin.setPassword("123");
         admin.addRole(roleAdmin);
         userService.add(admin);
 
@@ -33,7 +30,7 @@ public class InitController {
         roleUser = roleService.add(roleUser);
         User user = new User();
         user.setEmail("joe@gmail.com");
-        user.setPassword(passwordEncoder.encode("123"));
+        user.setPassword("123");
         user.addRole(roleUser);
         userService.add(user);
     }

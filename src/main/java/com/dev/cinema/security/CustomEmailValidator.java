@@ -11,7 +11,6 @@ public class CustomEmailValidator implements ConstraintValidator<EmailConstraint
                     + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
 
     private Pattern pattern;
-    private Matcher matcher;
 
     @Override
     public void initialize(EmailConstraint email) {
@@ -20,7 +19,7 @@ public class CustomEmailValidator implements ConstraintValidator<EmailConstraint
 
     @Override
     public boolean isValid(String contactField, ConstraintValidatorContext cxt) {
-        matcher = pattern.matcher(contactField);
+        Matcher matcher = pattern.matcher(contactField);
         return contactField != null && matcher.matches();
     }
 }

@@ -49,7 +49,7 @@ public class HelloController {
         Movie movie = injectMovie("Fast and Furious");
         CinemaHall cinemaHall = injectCinemaHall();
         MovieSession movieSession = injectMovieSession(movie, cinemaHall);
-        User user = injectUsersAndLogin();
+        User user = userService.findByEmail("joe@gmail.com");
         ShoppingCart shoppingCart = injectToShoppingCart(user, movieSession);
 
         injectOrder(user, shoppingCart);
