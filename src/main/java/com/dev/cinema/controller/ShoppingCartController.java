@@ -37,13 +37,15 @@ public class ShoppingCartController {
     private CinemaHallService cinemaHallService;
 
     @RequestMapping(value = "/add-movie-session", method = RequestMethod.POST)
-    public String add(Authentication authentication, @RequestBody @Valid MovieSessionDto movieSessionDto) {
+    public String add(Authentication authentication,
+                      @RequestBody @Valid MovieSessionDto movieSessionDto) {
         MovieSession movieSession = new MovieSession();
         movieSession.setMovie(movieService.get(movieSessionDto.getMovie()));
         movieSession.setCinemaHall(cinemaHallService.get(movieSessionDto.getCinemaHall()));
         movieSession.setShowTime(LocalDateTime.parse(movieSessionDto.getShowTime(),
                 DATE_TIME_FORMATTER));
-        shoppingCartService.addSession(movieSession, userService.findByEmail(authentication.getName()));
+        shoppingCartService.addSession(movieSession,
+                userService.findByEmail(authentication.getName()));
         return "movie session added to shopping cart";
     }
 

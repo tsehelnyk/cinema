@@ -1,6 +1,5 @@
 package com.dev.cinema.dto;
 
-import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
 public class CinemaHallDto {
