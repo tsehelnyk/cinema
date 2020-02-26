@@ -12,7 +12,7 @@ import javax.validation.constraints.Size;
                 message = "Passwords do not match!"
         )
 })
-public class UserRequestDto {
+public class UserRegistrationDto {
     @NotNull
     private String name;
     @NotNull

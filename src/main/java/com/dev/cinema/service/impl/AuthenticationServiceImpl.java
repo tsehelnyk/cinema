@@ -1,6 +1,7 @@
 package com.dev.cinema.service.impl;
 
 import com.dev.cinema.exception.AuthenticationException;
+import com.dev.cinema.model.Role;
 import com.dev.cinema.model.User;
 import com.dev.cinema.service.AuthenticationService;
 import com.dev.cinema.service.UserService;
@@ -31,6 +32,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
         user.setName(name);
         user.setEmail(email);
         user.setPassword(password);
+        user.addRole(new Role("USER"));
         return userService.add(user);
     }
 }

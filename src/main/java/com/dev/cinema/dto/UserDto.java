@@ -1,23 +1,27 @@
 package com.dev.cinema.dto;
 
 import com.dev.cinema.security.EmailConstraint;
+import java.util.Set;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-public class UserResponseDto {
+public class UserDto {
     @NotNull
     @Size(min = 5)
     @EmailConstraint
     private String email;
     @NotNull
     private String name;
+    @NotNull
+    private Set<String> roles;
 
-    public UserResponseDto() {
+    public UserDto() {
     }
 
-    public UserResponseDto(String email, String name) {
+    public UserDto(String email, String name, Set<String> roles) {
         this.email = email;
         this.name = name;
+        this.roles = roles;
     }
 
     public String getEmail() {
@@ -36,4 +40,11 @@ public class UserResponseDto {
         this.name = name;
     }
 
+    public Set<String> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(Set<String> roles) {
+        this.roles = roles;
+    }
 }
