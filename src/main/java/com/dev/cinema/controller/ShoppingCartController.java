@@ -13,7 +13,9 @@ import com.dev.cinema.service.UserService;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.stream.Collectors;
+import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -35,19 +37,22 @@ public class ShoppingCartController {
     private CinemaHallService cinemaHallService;
 
     @RequestMapping(value = "/add-movie-session", method = RequestMethod.POST)
-    public String add(Long userId, @RequestBody MovieSessionDto movieSessionDto) {
+    public String add(Authentication authentication,
+                      @RequestBody @Valid MovieSessionDto movieSessionDto) {
         MovieSession movieSession = new MovieSession();
         movieSession.setMovie(movieService.get(movieSessionDto.getMovie()));
         movieSession.setCinemaHall(cinemaHallService.get(movieSessionDto.getCinemaHall()));
         movieSession.setShowTime(LocalDateTime.parse(movieSessionDto.getShowTime(),
                 DATE_TIME_FORMATTER));
-        shoppingCartService.addSession(movieSession, userService.get(userId));
+        shoppingCartService.addSession(movieSession,
+                userService.findByEmail(authentication.getName()));
         return "movie session added to shopping cart";
     }
 
     @RequestMapping(value = "/by-user", method = RequestMethod.GET)
-    public ShoppingCartDto getByUserId(Long userId) {
-        ShoppingCart shoppingCart = shoppingCartService.getByUser(userService.get(userId));
+    public ShoppingCartDto getByUserId(@Valid Authentication authentication) {
+        ShoppingCart shoppingCart =
+                shoppingCartService.getByUser(userService.findByEmail(authentication.getName()));
         return new ShoppingCartDto(shoppingCart.getTickets().stream()
                 .map(t -> toTicketDto(t)).collect(Collectors.toList()),
                 shoppingCart.getUser().getId());

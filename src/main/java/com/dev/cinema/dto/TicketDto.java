@@ -1,9 +1,13 @@
 package com.dev.cinema.dto;
 
-public class TicketDto {
+import javax.validation.constraints.NotNull;
 
+public class TicketDto {
+    @NotNull(message = "Movie id in ticket could not be null")
     private String movie;
+    @NotNull(message = "Cinema hall id in ticket could not be null")
     private String cinemaHall;
+    @NotNull(message = "Showtime in ticket could not be null")
     private String showTime;
 
     public TicketDto() {

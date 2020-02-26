@@ -1,7 +1,11 @@
 package com.dev.cinema.dto;
 
+import javax.validation.constraints.NotNull;
+
 public class CinemaHallDto {
+    @NotNull(message = "Cinema hall capacity could not be null")
     private int capacity;
+    @NotNull(message = "Cinema hall description could not be null")
     private String description;
 
     public CinemaHallDto() {

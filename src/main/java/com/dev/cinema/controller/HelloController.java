@@ -1,6 +1,5 @@
 package com.dev.cinema.controller;
 
-import com.dev.cinema.exception.AuthenticationException;
 import com.dev.cinema.model.CinemaHall;
 import com.dev.cinema.model.Movie;
 import com.dev.cinema.model.MovieSession;
@@ -49,7 +48,7 @@ public class HelloController {
         Movie movie = injectMovie("Fast and Furious");
         CinemaHall cinemaHall = injectCinemaHall();
         MovieSession movieSession = injectMovieSession(movie, cinemaHall);
-        User user = injectUsersAndLogin();
+        User user = userService.findByEmail("joe@gmail.com");
         ShoppingCart shoppingCart = injectToShoppingCart(user, movieSession);
 
         injectOrder(user, shoppingCart);
@@ -97,20 +96,13 @@ public class HelloController {
     }
 
     private User injectUsersAndLogin() {
-        String userEmail = "joe@gmail.com";
         String userPassword = "123";
         authenticationService.register("Joe", "joe@gmail.com", userPassword);
         authenticationService.register("Bob","bob@gmail.com", userPassword);
         authenticationService.register("John","john@gmail.com", userPassword);
         authenticationService.register("Lenny","lenny@gmail.com", userPassword);
         stringBuilder.append(userService.get(1L) + " user injected\n");
-        try {
-            User user = authenticationService.login(userEmail, userPassword);
-            stringBuilder.append(user + " user logined\n");
-            return user;
-        } catch (AuthenticationException e) {
-            throw new RuntimeException("Something was wrong: ", e);
-        }
+        return userService.findByEmail("joe@gmail.com");
     }
 
     private ShoppingCart injectToShoppingCart(User user, MovieSession movieSession) {
